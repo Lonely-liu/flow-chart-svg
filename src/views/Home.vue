@@ -21,26 +21,27 @@
           @mousedown="handleDown"
           @mouseup="handleUp"
         >
-          <path @click="handleCPath" d='M 200 200 c 100 0 0 100 100 100' stroke="orange" fill="none"></path>
+          <path @click="handleCPath" d='M 200 200 c 0 100 10 -90 10 10' stroke="orange" fill="none"></path>
 
-          <rect x='0' y='0' width='100' height='100' fill='skyblue' canMove='1'
-            :translateX="svgLeft"
-            :translateY="svgTop"
-            :transform="`translate(${svgLeft}, ${svgTop})`"
-          ></rect>
+          <foreignObject x="10" y="300" width="100" height="10">
+            <div id="box" xmlns="http://www.w3.org/1999/xhtml">
+            tjvhvjv</div>
+            <rect
+              width='100' height='100' fill='orange' canMove='1'
+              :x='300' :y='300'
+              :translateX="svgLeft"
+              :translateY="svgTop"
+              :transform="`translate(${svgLeft}, ${svgTop})`"
+            ></rect>
+          </foreignObject>
           <rect
-            x='100' y='100' width='100' height='100' fill='skyblue' canMove='1'
+            v-for="item in [0, 1, 2]" :key="item"
+            :x='item*100' :y='item*100' width='100' height='100' fill='skyblue' canMove='1'
             :translateX="svgLeft"
             :translateY="svgTop"
             :transform="`translate(${svgLeft}, ${svgTop})`"
           ></rect>
-          <rect
-            width='100' height='100' fill='orange' canMove='1'
-            :x='300' :y='300'
-            :translateX="svgLeft"
-            :translateY="svgTop"
-            :transform="`translate(${svgLeft}, ${svgTop})`"
-          ></rect>
+          
           <!-- <rect x='300' y='300' width='100' height='100' fill='skyblue' canMove='1'></rect> -->
         </svg>
       </div>
@@ -145,6 +146,13 @@ export default class extends Vue {
   }
   .draw-board {
     flex: 1;
+    #box {
+      background-color: orange;
+      &:hover {
+        color: #fff;
+        background-color: purple;
+      }
+    }
   }
   .data-base {
     flex: 0 0 250px;
